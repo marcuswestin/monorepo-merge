@@ -55,7 +55,7 @@ function rewrite_history() {
             # Rewrite history to move all REPO files into a subdirectory
             export SUBDIRECTORY="${TARGET_FOLDER}/${REPO}"
             FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --index-filter '\
-                git ls-files -s | gsed "s#\t#&'"${SUBDIRECTORY}"'/#g" \
+                git ls-files -s | sed "s#\t#&'"${SUBDIRECTORY}"'/#g" \
                     | GIT_INDEX_FILE=${GIT_INDEX_FILE}.new git update-index --index-info && \
                         if [ -f "${GIT_INDEX_FILE}.new" ]; then \
                             mv "${GIT_INDEX_FILE}.new" "${GIT_INDEX_FILE}"; \
